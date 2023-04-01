@@ -7,10 +7,13 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
-public class checkoutPageObject {
+import utility.utilities;
+
+public class checkoutPageObject extends utilities {
 	WebDriver driver;
 
 	public checkoutPageObject(WebDriver driver) {
+		super(driver);
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
@@ -38,7 +41,16 @@ public class checkoutPageObject {
 	
 	@FindBy(css="span[class=\"totAmt\"]")
 	WebElement totalAmount;
-
+	
+	@FindBy(css="input[class=\"promoCode\"]")
+	WebElement  promoCode;
+	
+	@FindBy(css="button[class=\"promoBtn\"]")
+	WebElement promoButton;
+	
+	@FindBy(css="span[class=\"promoInfo\"]")
+	WebElement promoInfo;
+	
 	public void checkout() throws InterruptedException {
 		System.out.println(pageTitle.getText());
 		String[] vegitable = { "Brocolli", "Cauliflower","Cucumber" };
@@ -66,5 +78,13 @@ public class checkoutPageObject {
 		System.out.println(actualPrice);
 		System.out.println(expectedPrice);
 		Assert.assertEquals(actualPrice, expectedPrice);
+	}
+	
+	public void applyCouponCode(String coupon) {
+		promoCode.sendKeys(coupon);
+		promoButton.click();
+	//	waitforElementToDisplay(promoInfo);
+		Assert.assertEquals(promoInfo.getText(), "Code applied ..!");
+		
 	}
 }
