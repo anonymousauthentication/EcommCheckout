@@ -3,16 +3,11 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="webcheckoutTest.checkoutTest">
+      <class name="webcheckoutTest.ActionsClass">
         <methods>
-          <include name="checkoutProcess"/>
+          <include name="windowHandler"/>
         </methods>
-      </class> <!-- webcheckoutTest.checkoutTest -->
-      <class name="webcheckoutTest.launchBrowserTest">
-        <methods>
-          <include name="launchBrowser"/>
-        </methods>
-      </class> <!-- webcheckoutTest.launchBrowserTest -->
+      </class> <!-- webcheckoutTest.ActionsClass -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
