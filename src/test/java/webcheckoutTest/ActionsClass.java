@@ -79,9 +79,9 @@ public class ActionsClass extends Base {
 		List<WebElement> days = driver.findElements(By.cssSelector("span[class*=\"flatpickr-day\"]"));
 		int daySize = days.size();
 		try {
-			for (int i = 0; i <= daySize; i++) {
-				if (days.get(i).getText().contains("13")) {
-					days.get(i).click();
+			for (int j = 0; j <= daySize; j++) {
+				if (days.get(j).getText().contains("13")) {
+					days.get(j).click();
 					break;
 				}
 			}
