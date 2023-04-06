@@ -73,16 +73,20 @@ public class ActionsClass extends Base {
 		js.executeScript("window.scrollBy(0,1200)", "");
 		Thread.sleep(2000);
 		driver.findElement(By.xpath("//input[@id=\"form-field-travel_comp_date\"]")).click();
-		while(!driver.findElement(By.cssSelector("div[class=\"flatpickr-current-month\"]")).getText().contains("March")){
+		while (!driver.findElement(By.cssSelector("div[class=\"flatpickr-current-month\"]")).getText()
+				.contains("April")) {
 			driver.findElement(By.cssSelector("span[class=\"flatpickr-next-month\"]")).click();
 		}
 		List<WebElement> days = driver.findElements(By.cssSelector("span[class*=\"flatpickr-day\"]"));
 		int daySize = days.size();
 		try {
 			for (int j = 0; j <= daySize; j++) {
-				if (days.get(j).getText().contains("13")) {
-					days.get(j).click();
-					break;
+				if (days.get(j).getText().contains("27")) {
+					String classAtt = days.get(j).getAttribute("class");
+					if (!classAtt.contains("disabled")) {
+						days.get(j).click();
+						break;
+					}
 				}
 			}
 		} catch (Exception e) {

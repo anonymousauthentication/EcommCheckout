@@ -2,12 +2,12 @@
 <testng-results ignored="3" total="4" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-04-06T00:14:26 IST" name="Default suite" finished-at="2023-04-06T00:14:44 IST" duration-ms="18096">
+  <suite started-at="2023-04-06T23:29:51 IST" name="Default suite" finished-at="2023-04-06T23:30:11 IST" duration-ms="19465">
     <groups>
     </groups>
-    <test started-at="2023-04-06T00:14:26 IST" name="Default test" finished-at="2023-04-06T00:14:44 IST" duration-ms="18096">
+    <test started-at="2023-04-06T23:29:51 IST" name="Default test" finished-at="2023-04-06T23:30:11 IST" duration-ms="19465">
       <class name="webcheckoutTest.ActionsClass">
-        <test-method signature="calenderHandle()[pri:0, instance:webcheckoutTest.ActionsClass@16610890]" started-at="2023-04-06T00:14:26 IST" name="calenderHandle" finished-at="2023-04-06T00:14:44 IST" duration-ms="18024" status="PASS">
+        <test-method signature="calenderHandle()[pri:0, instance:webcheckoutTest.ActionsClass@16610890]" started-at="2023-04-06T23:29:52 IST" name="calenderHandle" finished-at="2023-04-06T23:30:11 IST" duration-ms="19340" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- calenderHandle -->
