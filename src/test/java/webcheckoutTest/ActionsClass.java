@@ -9,7 +9,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import common.Base;
@@ -92,5 +94,32 @@ public class ActionsClass extends Base {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+	}
+
+	@Test(testName = "handleScroll")
+	public void handloScroll() throws IOException {
+		initializeBrowser();
+		int sum = 0;
+		driver.get("https://rahulshettyacademy.com/AutomationPractice/");
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,600)");
+		js.executeScript("document.querySelector(\".tableFixHead\").scrollTop=5000");
+		List<WebElement> tableData = driver
+				.findElements(By.xpath("//div[@class=\"tableFixHead\"]/table[@id=\"product\"]/tbody/tr/td[4]"));
+		for (int i = 0; i < tableData.size(); i++) {
+			sum = sum + Integer.parseInt(tableData.get(i).getText());
+		}
+		int totalAmt = Integer.parseInt(
+				driver.findElement(By.cssSelector("div[class=\"totalAmount\"]")).getText().split(":")[1].trim());
+		Assert.assertEquals(sum, totalAmt);
+		System.out.println(sum + " " + totalAmt);
+	}
+
+	@Test(testName = "sslCheck")
+	public void sslCheck() throws IOException {
+		initializeBrowser();
+		// using ChromeOption and chromeOption_Class setAcceptInsecureCerts
+		driver.get("https://expired.badssl.com/");
+		takeScreenshot();
 	}
 }

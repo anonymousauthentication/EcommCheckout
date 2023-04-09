@@ -5,7 +5,7 @@
     <classes>
       <class name="webcheckoutTest.ActionsClass">
         <methods>
-          <include name="calenderHandle"/>
+          <include name="handloScroll"/>
         </methods>
       </class> <!-- webcheckoutTest.ActionsClass -->
     </classes>

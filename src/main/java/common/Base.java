@@ -1,11 +1,17 @@
 package common;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
+
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class Base {
@@ -16,12 +22,14 @@ public class Base {
 
 	public void initializeBrowser() throws IOException {
 		getGlobalData();
+		ChromeOptions ch = new ChromeOptions();
+		ch.setAcceptInsecureCerts(true);
 		url = prop.getProperty("siteUrl");
 		String browserName = prop.getProperty("browser");
 		System.out.println(browserName);
 		if (browserName.equalsIgnoreCase("chrome")) {
 			System.out.println("chrome");
-			driver = new ChromeDriver();
+			driver = new ChromeDriver(ch);
 		} else if (browserName.equalsIgnoreCase("firefox")) {
 			driver = new FirefoxDriver();
 		} else {
@@ -43,5 +51,11 @@ public class Base {
 		prop = new Properties();
 		files = new FileInputStream(System.getProperty("user.dir") + "\\src\\main\\java\\resources\\global.properties");
 		prop.load(files);
+	}
+	
+	public void takeScreenshot() throws IOException {
+		TakesScreenshot scrShot =((TakesScreenshot)driver);
+		File src = scrShot.getScreenshotAs(OutputType.FILE);
+		FileUtils.copyFile(src, new File(System.getProperty("user.dir")+"/Checkout/src/test/java/screenshots/image.png"));
 	}
 }
