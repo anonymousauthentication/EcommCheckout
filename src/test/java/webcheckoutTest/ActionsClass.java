@@ -1,6 +1,10 @@
 package webcheckoutTest;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -13,6 +17,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import common.Base;
 
@@ -121,5 +126,24 @@ public class ActionsClass extends Base {
 		// using ChromeOption and chromeOption_Class setAcceptInsecureCerts
 		driver.get("https://expired.badssl.com/");
 		takeScreenshot();
+	}
+
+	@Test(testName = "brokenLink")
+	public void getbrokenList() throws MalformedURLException, IOException {
+		initializeBrowser();
+		driver.get("https://rahulshettyacademy.com/AutomationPractice/");
+		List<WebElement> link = driver.findElements(By.cssSelector("li a"));
+		SoftAssert a = new SoftAssert();
+		for (WebElement er : link) {
+			String url = er.getAttribute("href");
+			HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
+			conn.setRequestMethod("HEAD");
+			conn.connect();
+			int responseCode = conn.getResponseCode();
+			a.assertTrue(responseCode < 400, "");
+			a.assertTrue(responseCode < 400,
+					"The link with Text" + er.getText() + " is broken with code" + responseCode);
+		}
+		a.assertAll();
 	}
 }
